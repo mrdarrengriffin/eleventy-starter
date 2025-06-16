@@ -2,7 +2,10 @@
 
 <meta charset="utf-8" />
 
-<meta name="apple-mobile-web-app-title" content="{{ description or metadata.description }}" />
+<meta
+  name="apple-mobile-web-app-title"
+  content="{{ description or metadata.description }}"
+/>
 <meta name="description" content="{{ description or metadata.description }}" />
 <meta name="generator" content="{{ eleventy.generator }}" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,4 +17,4 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
 <!-- Put fonts here -->
-<link rel="stylesheet" href="/css/index.css?v={{ CACHE_KEY }}" />
+<link rel="stylesheet" href="/css/index.css" />

@@ -2,8 +2,7 @@ import { InputPathToUrlTransformPlugin, HtmlBasePlugin } from "@11ty/eleventy";
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginFilters from "./_config/filters.js";
-import { resolve } from "path";
-import { existsSync, statSync } from "fs";
+import { cacheBuster } from "./_config/cache.js";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function (eleventyConfig) {
@@ -13,11 +12,6 @@ export default async function (eleventyConfig) {
     "src/js": "js",
     "src/video": "video",
   });
-
-  eleventyConfig.addGlobalData(
-    "CACHE_KEY",
-    btoa("" + new Date().valueOf()).replaceAll("=", "")
-  );
 
   // Run Eleventy when these files change:
   // https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
@@ -39,6 +33,7 @@ export default async function (eleventyConfig) {
   eleventyConfig.addPlugin(HtmlBasePlugin);
   eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addPlugin(cacheBuster);
 
   eleventyConfig.addFilter("sitemapExclude", function (collection) {
     return collection.filter((item) => item.data.sitemap !== false);
